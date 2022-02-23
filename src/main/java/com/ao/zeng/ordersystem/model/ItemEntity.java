@@ -3,7 +3,13 @@ package com.ao.zeng.ordersystem.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.*;
+import org.hibernate.annotations.Where;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -11,13 +17,13 @@ import java.sql.Timestamp;
 @Data
 @Table(name = "item")
 @NoArgsConstructor
+@Where(clause = "deleted = 0")
 public class ItemEntity implements Serializable {
     private static final long serialVersionUID = -6080917794541325111L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", insertable = false, nullable = false)
-    @JsonIgnore
     private Integer id;
 
     @Column(name="category")
@@ -26,32 +32,39 @@ public class ItemEntity implements Serializable {
     @Column(name="name")
     private String name;
 
-    @Column(name="description")
-    private String description;
+    @Column(name="subtitle")
+    private String subtitle;
 
-    @Column(name="weight")
-    private Double weight;
+    @Column(name="brand")
+    private Integer brand;
+
+    @Column(name="introduction")
+    private String introduction;
+
+    @Column(name="item_number")
+    private String itemNumber;
+
+    @Column(name="price")
+    private Long price;
 
     @Column(name="market_price")
-    private Double marketPrice;
-
-    @Column(name="sell_price")
-    private Double sellPrice;
-
-    @Column(name="cost")
-    private Double cost;
+    private Long marketPrice;
 
     @Column(name="inventory")
-    private Integer inventory;
+    private Long inventory;
 
-    @Column(name="inventory_alert")
-    private Integer inventoryAlert;
 
-    @Column(name="label")
-    private String label;
+    @Column(name="unit")
+    private String unit;
 
-    @Column(name="image_url")
-    private String imageUrl;
+    @Column(name="weight")
+    private Integer weight;
+
+    @Column(name="sort")
+    private Integer sort;
+
+    @Column(name="detail")
+    private String detail;
 
     @Column(name="created_at", nullable = false, updatable = false)
     @JsonIgnore
@@ -61,17 +74,26 @@ public class ItemEntity implements Serializable {
     @JsonIgnore
     private Timestamp updatedAt;
 
-    public ItemEntity(Integer category, String name, String description, Double weight, Double marketPrice, Double sellPrice, Double cost, Integer inventory, Integer inventoryAlert, String label, String imageUrl) {
+    @Column(name="deleted", nullable = false, columnDefinition = "TINYINT")
+    private Integer deleted;
+
+    public ItemEntity(Integer id, Integer category, String name, String subtitle, Integer brand, String introduction,
+                      String itemNumber, Long price, Long marketPrice, Long inventory, String unit, Integer weight, Integer sort,
+                      String detail, Integer deleted) {
+        this.id = id;
         this.category = category;
         this.name = name;
-        this.description = description;
-        this.weight = weight;
+        this.subtitle = subtitle;
+        this.brand = brand;
+        this.introduction = introduction;
+        this.itemNumber = itemNumber;
+        this.price = price;
         this.marketPrice = marketPrice;
-        this.sellPrice = sellPrice;
-        this.cost = cost;
         this.inventory = inventory;
-        this.inventoryAlert = inventoryAlert;
-        this.label = label;
-        this.imageUrl = imageUrl;
+        this.unit = unit;
+        this.weight = weight;
+        this.sort = sort;
+        this.detail = detail;
+        this.deleted = deleted;
     }
 }
