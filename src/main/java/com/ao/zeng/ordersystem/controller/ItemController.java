@@ -1,18 +1,17 @@
 package com.ao.zeng.ordersystem.controller;
 
 import com.ao.zeng.ordersystem.model.ItemEntity;
-import com.ao.zeng.ordersystem.repository.ItemRepository;
 import com.ao.zeng.ordersystem.request.ItemCreationRequest;
 import com.ao.zeng.ordersystem.service.ItemService;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/item")
+@CrossOrigin
 public class ItemController {
 
     private ItemService itemService;
