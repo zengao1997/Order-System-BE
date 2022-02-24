@@ -66,11 +66,11 @@ public class ItemEntity implements Serializable {
     @Column(name="detail")
     private String detail;
 
-    @Column(name="created_at", nullable = false, updatable = false)
+    @Column(name="created_at")
     @JsonIgnore
     private Timestamp createdAt;
 
-    @Column(name="updated_at", nullable = false)
+    @Column(name="updated_at")
     @JsonIgnore
     private Timestamp updatedAt;
 

@@ -4,10 +4,9 @@ import com.ao.zeng.ordersystem.model.ItemEntity;
 import com.ao.zeng.ordersystem.repository.ItemRepository;
 import com.ao.zeng.ordersystem.request.ItemCreationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
@@ -24,14 +23,13 @@ public class ItemService {
         return this.itemRepository.findAll();
     }
 
-    public String insertOrUpdateItem(ItemCreationRequest itemCreationRequest) {
+    @Transactional(rollbackFor = RuntimeException.class)
+    public ResponseEntity<?> insertOrUpdateItem(ItemCreationRequest itemCreationRequest) {
         try {
             this.itemRepository.save(itemCreationRequest.toItemEntity());
-            return "insert or updated successfully.";
+            return ResponseEntity.ok("create item successfully.");
         } catch (Exception e) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, e.getMessage()
-            );
+            return ResponseEntity.badRequest().body("unable to create or update item.");
         }
     }
 }
