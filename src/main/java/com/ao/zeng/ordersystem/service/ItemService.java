@@ -20,7 +20,7 @@ public class ItemService {
     }
 
     public List<ItemEntity> getAllItems() {
-        return this.itemRepository.findAll();
+        return this.itemRepository.findAllByOrderBySortDesc();
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
@@ -29,7 +29,7 @@ public class ItemService {
             this.itemRepository.save(itemCreationRequest.toItemEntity());
             return ResponseEntity.ok("create item successfully.");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("unable to create or update item.");
+            return ResponseEntity.badRequest().body(e.getCause());
         }
     }
 }

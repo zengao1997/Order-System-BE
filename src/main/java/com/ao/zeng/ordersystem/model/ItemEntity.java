@@ -1,9 +1,13 @@
 package com.ao.zeng.ordersystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -68,18 +72,23 @@ public class ItemEntity implements Serializable {
 
     @Column(name="created_at")
     @JsonIgnore
+    @CreatedDate
     private Timestamp createdAt;
 
     @Column(name="updated_at")
     @JsonIgnore
+    @LastModifiedDate
     private Timestamp updatedAt;
 
     @Column(name="deleted", nullable = false, columnDefinition = "TINYINT")
     private Integer deleted;
 
+    @Column(name = "image")
+    private String image;
+
     public ItemEntity(Integer id, Integer category, String name, String subtitle, Integer brand, String introduction,
                       String itemNumber, Long price, Long marketPrice, Long inventory, String unit, Integer weight, Integer sort,
-                      String detail, Integer deleted) {
+                      String detail, Integer deleted, String image) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -95,5 +104,6 @@ public class ItemEntity implements Serializable {
         this.sort = sort;
         this.detail = detail;
         this.deleted = deleted;
+        this.image = image;
     }
 }

@@ -2,6 +2,7 @@ package com.ao.zeng.ordersystem.request;
 
 import com.ao.zeng.ordersystem.model.ItemEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -45,12 +46,14 @@ public class ItemCreationRequest implements Serializable {
     private String introduction;
 
     @ApiModelProperty(value = "item_number")
+    @JsonProperty("item_number")
     private String itemNumber;
 
     @ApiModelProperty(value = "price")
     private Long price;
 
     @ApiModelProperty(value = "market_price")
+    @JsonProperty("market_price")
     private Long marketPrice;
 
     @ApiModelProperty(value = "inventory")
@@ -68,13 +71,16 @@ public class ItemCreationRequest implements Serializable {
     @ApiModelProperty(value = "detail")
     private String detail;
 
+    @ApiModelProperty(value = "image")
+    private String image;
+
     @ApiModelProperty(value = "deleted")
-    private Integer deleted;
+    private Integer deleted = 0;
 
 
     public ItemEntity toItemEntity() {
         return new ItemEntity(this.id, this.category.get(1), this.name, this.subtitle, this.brand, this.introduction,
                 this.itemNumber, this.price, this.marketPrice, this.inventory, this.unit, this.weight, this.sort, this.detail,
-                this.deleted);
+                this.deleted, this.image);
     }
 }
