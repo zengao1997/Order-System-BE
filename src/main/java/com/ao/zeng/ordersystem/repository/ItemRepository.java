@@ -6,8 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author aozeng
+ */
 @Repository
 public interface ItemRepository extends JpaRepository<ItemEntity, Integer> {
 
     List<ItemEntity> findAllByOrderBySortDesc();
+
 }

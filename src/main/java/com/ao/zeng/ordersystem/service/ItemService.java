@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
+/**
+ * @author aozeng
+ */
 @Service
 public class ItemService {
 
@@ -28,6 +32,16 @@ public class ItemService {
         try {
             this.itemRepository.save(itemCreationRequest.toItemEntity());
             return ResponseEntity.ok("create item successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getCause());
+        }
+    }
+
+    @Transactional(rollbackFor = RuntimeException.class)
+    public ResponseEntity<?> deleteItem(Integer itemId) {
+        try {
+            this.itemRepository.deleteById(itemId);
+            return ResponseEntity.ok("deleted successfully.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getCause());
         }

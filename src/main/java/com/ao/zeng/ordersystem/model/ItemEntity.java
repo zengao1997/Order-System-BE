@@ -1,22 +1,19 @@
 package com.ao.zeng.ordersystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+/**
+ * @author aozeng
+ */
 @Entity
 @Data
 @Table(name = "item")
@@ -30,57 +27,57 @@ public class ItemEntity implements Serializable {
     @Column(name = "id", insertable = false, nullable = false)
     private Integer id;
 
-    @Column(name="category")
+    @Column(name = "category")
     private Integer category;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="subtitle")
+    @Column(name = "subtitle")
     private String subtitle;
 
-    @Column(name="brand")
+    @Column(name = "brand")
     private Integer brand;
 
-    @Column(name="introduction")
+    @Column(name = "introduction")
     private String introduction;
 
-    @Column(name="item_number")
+    @Column(name = "item_number")
     private String itemNumber;
 
-    @Column(name="price")
+    @Column(name = "price")
     private Long price;
 
-    @Column(name="market_price")
+    @Column(name = "market_price")
     private Long marketPrice;
 
-    @Column(name="inventory")
+    @Column(name = "inventory")
     private Long inventory;
 
 
-    @Column(name="unit")
+    @Column(name = "unit")
     private String unit;
 
-    @Column(name="weight")
+    @Column(name = "weight")
     private Integer weight;
 
-    @Column(name="sort")
+    @Column(name = "sort")
     private Integer sort;
 
-    @Column(name="detail")
+    @Column(name = "detail")
     private String detail;
 
-    @Column(name="created_at")
+    @Column(name = "created_at")
     @JsonIgnore
     @CreatedDate
     private Timestamp createdAt;
 
-    @Column(name="updated_at")
+    @Column(name = "updated_at")
     @JsonIgnore
     @LastModifiedDate
     private Timestamp updatedAt;
 
-    @Column(name="deleted", nullable = false, columnDefinition = "TINYINT")
+    @Column(name = "deleted", nullable = false, columnDefinition = "TINYINT")
     private Integer deleted;
 
     @Column(name = "image")

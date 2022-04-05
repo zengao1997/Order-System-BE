@@ -15,6 +15,9 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author aozeng
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,22 +30,22 @@ public class ItemCreationRequest implements Serializable {
     private Integer id;
 
     @ApiModelProperty(value = "category name", required = true)
-    @NotEmpty(message="Item needs to have a category.")
+    @NotEmpty(message = "Item needs to have a category.")
     private List<Integer> category;
 
     @ApiModelProperty(value = "name", required = true)
-    @NotBlank(message="Item needs to have a name.")
+    @NotBlank(message = "Item needs to have a name.")
     private String name;
 
     @ApiModelProperty(value = "subtitle", required = true)
-    @NotBlank(message="Item needs to have a subtitle.")
+    @NotBlank(message = "Item needs to have a subtitle.")
     private String subtitle;
 
     @ApiModelProperty(value = "brand", required = true)
-    @NotEmpty(message="Item needs to have a brand.")
+    @NotEmpty(message = "Item needs to have a brand.")
     private Integer brand;
 
-    @Column(name="introduction")
+    @Column(name = "introduction")
     private String introduction;
 
     @ApiModelProperty(value = "item_number")
